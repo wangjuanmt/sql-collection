@@ -5,7 +5,12 @@ Relational database means the data is stored as well as retrieved in the form of
 
 Table 1 shows the relational database with only one relation called STUDENT which stores ROLL_NO, NAME, ADDRESS, PHONE and AGE of students.
 STUDENT
-![TABLE 1](student.png)
+| ROLL_NO | NAME | ADDRESS | PHONE      | AGE |
+|---------|------|---------|------------|-----|
+| 1       | RAM  | DELHI   | 9455123451 | 18  |
+| 2       | RAMESH | GURGAON | 9652431543 | 18 |
+| 3       | SUJIT | ROHTAK | 9156253131 | 20 |
+| 4       | SURESH | DELHI | 9156768971 | 18 |
 
 These are some important terminologies that are used in terms of relation.
 
@@ -137,4 +142,99 @@ A Data Control Language is a syntax similar to a computer programming language u
 GRANT: allow specified users to perform specified tasks.
 REVOKE: cancel previously granted or denied permissions.
 ``````
+
+### Views
+Views in SQL are kind of virtual tables. A view also has rows and columns as they are in a real table in the database. We can create a view by selecting fields from one or more tables present in the database. A View can either have all the rows of a table or specific rows based on certain condition.
+Syntax:
+`````` sql
+CREATE VIEW view_name AS
+SELECT column1, column2.....
+FROM table_name
+WHERE condition;
+
+view_name: Name for the View
+table_name: Name of the table
+condition: Condition to select rows
+``````
+
+Create view from multiple tables.
+`````` sql
+CREATE VIEW MarksView AS
+SELECT StudentDetails.NAME, StudentDetails.ADDRESS, StudentMarks.MARKS
+FROM StudentDetails, StudentMarks
+WHERE StudentDetails.NAME = StudentMarks.NAME;
+``````
+
+We can delete or drop a View using the DROP statement.
+`DROP VIEW MarksView;`
+
+#### UPDATING VIEWS
+There are certain conditions needed to be satisfied to update a view. If any one of these conditions is not met, then we will not be allowed to update the view.
+1. The SELECT statement which is used to create the view should not include GROUP BY clause or ORDER BY clause.
+2. The SELECT statement should not have the DISTINCT keyword.
+3. The View should have all NOT NULL values.
+4. The view should not be created using nested queries or complex queries.
+5. The view should be created from a single table. If the view is created using multiple tables then we will not be allowed to update the view.
+
+We can use the CREATE OR REPLACE VIEW statement to add or remove fields from a view.
+Syntax:
+`````` sql
+CREATE OR REPLACE VIEW view_name AS
+SELECT column1,coulmn2,..
+FROM table_name
+WHERE condition;
+``````
+
+For example, if we want to update the view MarksView and add the field AGE to this View from StudentMarks Table, we can do this as:
+`````` sql
+CREATE OR REPLACE VIEW MarksView AS
+SELECT StudentDetails.NAME, StudentDetails.ADDRESS, StudentMarks.MARKS, StudentMarks.AGE
+FROM StudentDetails, StudentMarks
+WHERE StudentDetails.NAME = StudentMarks.NAME;
+``````
+
+Inserting a row in a view:
+We can insert a row in a View in a same way as we do in a table. We can use the INSERT INTO statement of SQL to insert a row in a View.Syntax:
+`````` sql
+INSERT INTO view_name(column1, column2 , column3,..) 
+VALUES(value1, value2, value3..);
+
+view_name: Name of the View
+``````
+**Inserting into a view is actually inserting into the real table, while deleting a row from a view is actually deleting from the real table.
+
+Deleting rows from a view is also as simple as deleting rows from a table. We can use the DELETE statement of SQL to delete rows from a view. Also deleting a row from a view first delete the row from the actual table and the change is then reflected in the view.Syntax:
+`````` sql
+DELETE FROM view_name
+WHERE condition;
+
+view_name:Name of view from where we want to delete rows
+condition: Condition to select rows 
+``````
+
+The WITH CHECK OPTION clause in SQL is a very useful clause for views. It is applicable to a updatable view. If the view is not updatable, then there is no meaning of including this clause in the CREATE VIEW statement.
+
+* The WITH CHECK OPTION clause is used to prevent the insertion of rows in the view where the condition in the WHERE clause in CREATE VIEW statement is not satisfied.
+* If we have used the WITH CHECK OPTION clause in the CREATE VIEW statement, and if the UPDATE or INSERT clause does not satisfy the conditions then they will return an error.
+
+Example:
+In the below example we are creating a View SampleView from StudentDetails Table with WITH CHECK OPTION clause.
+`````` sql
+CREATE VIEW SampleView AS
+SELECT S_ID, NAME
+FROM  StudentDetails
+WHERE NAME IS NOT NULL
+WITH CHECK OPTION;
+``````
+In this View if we now try to insert a new row with null value in the NAME column then it will give an error because the view is created with the condition for NAME column as NOT NULL.
+For example,though the View is updatable but then also the below query for this View is not valid:
+`````` sql
+INSERT INTO SampleView(S_ID)
+VALUES(6);
+``````
+
+### Indexes
+Index is a schema object. It is used by the server to **speed up** the retrieval of rows by using a pointer. It can reduce disk I/O(input/output) by using a rapid path access method to locate data quickly. An index helps to speed up **select** queries and **where** clauses, but it slows down data input, with the **update** and the **insert** statements. Indexes can be created or dropped with no effect on the data.
+
+
 
