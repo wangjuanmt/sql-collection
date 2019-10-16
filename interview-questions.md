@@ -87,4 +87,4 @@ There are a few ways to do this. Nevertheless, the command presented below can b
 ### Que-15: How would you retrieve common records from two tables ?
 Explanation:
 By performing the task below:
-`Select employeeID from employee. INTERSECT Select EmployeeID from WorkShift` 
+`Select employeeID from employee INTERSECT Select EmployeeID from WorkShift` 
