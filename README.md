@@ -238,8 +238,8 @@ VALUES(6);
 Index is a schema object. It is used by the server to **speed up** the retrieval of rows by using a pointer. It can reduce disk I/O(input/output) by using a rapid path access method to locate data quickly. An index helps to speed up **select** queries and **where** clauses, but it slows down data input, with the **update** and the **insert** statements. Indexes can be created or dropped with no effect on the data.
 
 ```` sql
- CREATE INDEX table_index
- ON TABLE (cloumn1, column2,.....);
+CREATE [UNIQUE] [CLUSTERED| NONCLUSTERED] INDEX <index_name>
+ON <table_name>(<column>[ASC|DESC] [, <column>[ASC|DESC]...])
 ````
 
 ````sql
@@ -248,11 +248,23 @@ ON TABLE column;
 ````
 
 3 types of indexes:
-* Clustered – reorders the table and searches for information with the use of key values
+* Clustered – reorders the table according to the physical storage order and searches for information with the use of key values
 * Non-clustered – maintains the order of the table
 * Unique – forbids fields to have duplicated values
 
 Unique indexes are used for the maintenance of the integrity of the data present in the table as well as for the fast performance, it does not allow multiple values to enter into the table.
 
 Moreover, a table can have multiple non-cluster indexes, but only 1 single clustered one.
+
+When should indexes be created –
+* A column contains a wide range of values
+* A column does not contain a large number of null values
+* One or more columns are frequently used together in a where clause or a join condition
+
+When should indexes be avoided –
+* The table is small
+* The columns are not often used as a condition in the query
+* The column is updated frequently
+
+Removing an Index – To remove an index from the data dictionary by using the `DROP INDEX index_name` command.
 
