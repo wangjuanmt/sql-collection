@@ -5,12 +5,13 @@ Relational database means the data is stored as well as retrieved in the form of
 
 Table 1 shows the relational database with only one relation called STUDENT which stores ROLL_NO, NAME, ADDRESS, PHONE and AGE of students.
 STUDENT
-| ROLL_NO | NAME | ADDRESS | PHONE      | AGE |
-|---------|------|---------|------------|-----|
-| 1       | RAM  | DELHI   | 9455123451 | 18  |
-| 2       | RAMESH | GURGAON | 9652431543 | 18 |
-| 3       | SUJIT | ROHTAK | 9156253131 | 20 |
-| 4       | SURESH | DELHI | 9156768971 | 18 |
+
+| ROLL_NO | NAME   | ADDRESS | PHONE      | AGE |
+|---------|--------|---------|------------|-----|
+| 1       | RAM    | DELHI   | 9455123451 | 18  |
+| 2       | RAMESH | GURGAON | 9652431543 | 18  |
+| 3       | SUJIT  | ROHTAK  | 9156253131 | 20  |
+| 4       | SURESH | DELHI   | 9156768971 | 18  |
 
 These are some important terminologies that are used in terms of relation.
 
