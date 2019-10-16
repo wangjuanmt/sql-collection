@@ -81,6 +81,7 @@ Declerative DMLs (also referred as Non-procedural DMLs) : require a user to spec
 
 ### TCL (Transaction Control Language) 
 Transaction Control Language commands are used to manage transactions in the database. These are used to manage the changes made by DML-statements. It also allows statements to be grouped together into logical transactions.
+Following commands are used to control transactions. It is important to note that these statements cannot be used while creating tables and are only used with the DML Commands such as – INSERT, UPDATE and DELETE.
 `````` sql
 COMMIT: Commit command is used to permanently save any transaction
             into the database.
@@ -90,6 +91,43 @@ ROLLBACK: This command restores the database to last committed state.
 SAVEPOINT: Savepoint command is used to temporarily save a transaction so
             that you can rollback to that point whenever necessary.
 ``````
+
+1. SET TRANSACTION: Places a name on a transaction.
+Syntax:
+`SET TRANSACTION [ READ WRITE | READ ONLY ];`
+2. COMMIT: If everything is in order with all statements within a single transaction, all changes are recorded together in the database is called committed. The COMMIT command saves all the transactions to the database since the last COMMIT or ROLLBACK command.
+Syntax:
+`COMMIT;`
+3. ROLLBACK: If any error occurs with any of the SQL grouped statements, all changes need to be aborted. The process of reversing changes is called rollback. This command can only be used to undo transactions since the last COMMIT or ROLLBACK command was issued.
+Syntax:
+`ROLLBACK;`
+Example:
+`````` sql
+DELETE FROM Student WHERE AGE = 20;
+ROLLBACK;
+``````
+or 
+`````` sql
+DELETE FROM Student WHERE AGE = 20;
+COMMIT;
+ROLLBACK;
+``````
+4. SAVEPOINT: creates points within the groups of transactions in which to ROLLBACK.
+A SAVEPOINT is a point in a transaction in which you can roll the transaction back to a certain point without rolling back the entire transaction.
+This command is used only in the creation of SAVEPOINT among all the transactions.
+In general ROLLBACK is used to undo a group of transactions.
+`````` sql
+SAVEPOINT SP1;
+//Savepoint created.
+DELETE FROM Student WHERE AGE = 20;
+//deleted
+SAVEPOINT SP2;
+//Savepoint created.
+ROLLBACK TO SP1;
+//Rollback completed.
+``````
+5. RELEASE SAVEPOINT:- This command is used to remove a SAVEPOINT that you have created.
+Once a SAVEPOINT has been released, you can no longer use the ROLLBACK command to undo transactions performed since the last SAVEPOINT.
 
 #### 
 
