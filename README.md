@@ -71,3 +71,32 @@ Integrity constraints used in DDL:
 read authorization – which allows reading but not modification of data ;
 insert authorization – which allow insertion of new data but not modification of existing data
 update authorization – which allows modification, but not deletion.
+
+### DML (Data Manipulation Language)
+DML statements are used for managing data with in schema objects.
+DML are of two types –
+* Procedural DMLs : require a user to specify what data are needed and how to get those data.
+Declerative DMLs (also referred as Non-procedural DMLs) : require a user to specify what data are needed without specifying how to get those data.
+* Declarative DMLs are usually easier to learn and use than procedural DMLs. However, since a user does not have to specify how to get the data, the database system has to figure out an efficient means of accessing data.
+
+### TCL (Transaction Control Language) 
+Transaction Control Language commands are used to manage transactions in the database. These are used to manage the changes made by DML-statements. It also allows statements to be grouped together into logical transactions.
+`````` sql
+COMMIT: Commit command is used to permanently save any transaction
+            into the database.
+ROLLBACK: This command restores the database to last committed state.
+            It is also used with savepoint command to jump to a savepoint
+            in a transaction.
+SAVEPOINT: Savepoint command is used to temporarily save a transaction so
+            that you can rollback to that point whenever necessary.
+``````
+
+#### 
+
+### DCL (Data Control Language) 
+A Data Control Language is a syntax similar to a computer programming language used to control access to data stored in a database (Authorization). In particular, it is a component of Structured Query Language (SQL).
+`````` sql
+GRANT: allow specified users to perform specified tasks.
+REVOKE: cancel previously granted or denied permissions.
+``````
+
