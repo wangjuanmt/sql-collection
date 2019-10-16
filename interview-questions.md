@@ -1,3 +1,4 @@
+The following questions are from [advanced-sql-interview-questions](https://www.geeksforgeeks.org/advanced-sql-interview-questions/)
 ### Que-1: Explain the meaning of ‘index’.
 Explanation:
 Indexes help retrieve information from the database faster and with higher efficiency. In other words, it’s a method that enhances performance and there are 3 types of indexes:
@@ -88,3 +89,16 @@ There are a few ways to do this. Nevertheless, the command presented below can b
 Explanation:
 By performing the task below:
 `Select employeeID from employee INTERSECT Select EmployeeID from WorkShift` 
+
+The following questions are from [sql-interview-questions](https://www.interviewbit.com/sql-interview-questions/)
+
+### 1. What is Database?
+A database is an organized collection of data, stored and retrieved digitally from a remote or local computer system. Databases can be vast and complex, and such databases are developed using fixed design and modeling approaches.
+
+### 2. What is DBMS?
+DBMS stands for Database Management System. DBMS is a system software responsible for the creation, retrieval, updation and management of the database. It ensures that our data is consistent, organized and is easily accessible by serving as an interface between the database and its end users or application softwares.
+
+### 3. What is RDBMS? How is it different from DBMS?
+RDBMS stands for Relational Database Management System. The key difference here, compared to DBMS, is that RDBMS stores data in the form of a collection of tables and relations can be defined between the common fields of these tables. Most modern database management systems like MySQL, Microsoft SQL Server, Oracle, IBM DB2 and Amazon Redshift are based on RDBMS.
+
+
