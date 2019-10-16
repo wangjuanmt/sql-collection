@@ -268,3 +268,90 @@ When should indexes be avoided –
 
 Removing an Index – To remove an index from the data dictionary by using the `DROP INDEX index_name` command.
 
+### Roles
+First, the (Database Administrator)DBA must create the role. Then the DBA can assign privileges to the role and users to the role.
+```` sql
+-- create role
+CREATE ROLE manager;
+
+-- grant privileges to role
+GRANT create table, create view TO manager;
+
+-- assign users to role
+GRANT manager TO SAM, STARK;
+
+-- revoke privileges from role
+REVOKE create table FROM manager;
+
+-- drop role
+DROP ROLE manager;
+````
+
+### SEQUENCES
+Sequence is a set of integers 1, 2, 3, … that are generated and supported by some database systems to produce unique values on demand.
+
+A sequence is a user defined schema bound object that generates a sequence of numeric values.
+Sequences are frequently used in many databases because many applications require each row in a table to contain a unique value and sequences provides an easy way to generate them.
+The sequence of numeric values is generated in an ascending or descending order at defined intervals and can be configured to restart when exceeds max_value.
+Syntax:
+```` sql
+CREATE SEQUENCE sequence_name
+START WITH initial_value
+INCREMENT BY increment_value
+MINVALUE minimum value
+MAXVALUE maximum value
+CYCLE|NOCYCLE ;
+
+sequence_name: Name of the sequence.
+initial_value: starting value from where the sequence starts. Initial_value should be greater than or equal to minimum value and less than equal to maximum value.
+increment_value: Value by which sequence will increment itself. Increment_value can be positive or negative.
+minimum_value: Minimum value of the sequence.
+maximum_value: Maximum value of the sequence.
+cycle: When sequence reaches its set_limit it starts from beginning.
+nocycle: An exception will be thrown if sequence exceeds its max_value.
+````
+
+Example 1:
+```` sql
+CREATE SEQUENCE sequence_1
+start with 1
+increment by 1
+minvalue 0
+maxvalue 100
+cycle;
+````
+Above query will create a sequence named sequence_1.Sequence will start from 1 and will be incremented by 1 having maximum value 100. Sequence will repeat itself from start value after exceeding 100.
+
+Example 2:
+Following is the sequence query creating sequence in descending order.
+```` sql
+CREATE SEQUENCE sequence_2
+start with 100
+increment by -1
+minvalue 1
+maxvalue 100
+cycle;
+````
+Above query will create a sequence named sequence_2.Sequence will start from 100 and should be less than or equal to maximum value and will be incremented by -1 having minimum value 1.
+
+Example to use sequence : create a table named students with columns as id and name.
+```` sql
+CREATE TABLE students
+( 
+ID number(10),
+NAME char(20)
+);
+````
+Now insert values into table
+```` sql
+INSERT into students VALUES(sequence_1.nextval,'Ramesh');
+INSERT into students VALUES(sequence_1.nextval,'Suresh');
+````
+where sequence_1.nextval will insert id’s in id column in a sequence as defined in sequence_1.
+Output:
+
+| ID | NAME |
+|---------|--------|
+| 1       | Ramesh |
+| 2       | Suresh |
+
