@@ -114,9 +114,40 @@ A table is an organized collection of data stored in the form of rows and column
 Constraints are used to specify the rules concerning data in the table. It can be applied for single or multiple fields in an SQL table during creation of table or after creationg using the ALTER TABLE command. The constraints are:
 
 * NOT NULL - Restricts NULL value from being inserted into a column.
-* CHECK - Verifies that all values in a field satisfy a condition.
+* CHECK - Verifies that all values in a field satisfy a particular condition.
 * DEFAULT - Automatically assigns a default value if no value has been specified for the field.
-* UNIQUE - Ensures unique values to be inserted into the field.
+* UNIQUE - Ensures unique values to be inserted into the field (column).
 * INDEX - Indexes a field providing faster retrieval of records.
-* PRIMARY KEY - Uniquely identifies each record in a table.
-* FOREIGN KEY - Ensures referential integrity for a record in another table.
+* PRIMARY KEY - Is a field which can uniquely identify each row in a table. 
+* FOREIGN KEY - Ensures referential integrity for a record in another table. A Foreign key is a field which can uniquely identify each row in another table.
+
+We can specify constraints at the time of creating the table using CREATE TABLE statement. We can also specify the constraints after creating a table using ALTER TABLE statement.
+
+```` sql
+CREATE TABLE Orders
+(
+O_ID int NOT NULL,
+ORDER_NO int NOT NULL,
+C_ID int,
+PRIMARY KEY (O_ID),
+FOREIGN KEY (C_ID) REFERENCES Customers(C_ID)
+)
+````
+
+```` sql
+CREATE TABLE Student
+(
+ID int(6) NOT NULL UNIQUE,
+NAME varchar(10) NOT NULL,
+AGE int NOT NULL CHECK (AGE >= 18)  // CHECK
+);
+````
+
+```` sql
+CREATE TABLE Student
+(
+ID int(6) NOT NULL,
+NAME varchar(10) NOT NULL,
+AGE int DEFAULT 18  // DEFALUT
+);
+````
