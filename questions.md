@@ -213,3 +213,6 @@ CROSS JOIN subjects AS sub;
 ![cross-join](https://assets.interviewbit.com/assets/skill_interview_questions/sql/sql-self-cross-join-ac01aba97313e5f8740292417b156d4cdd524a5c5ac4efc3acd77d38434af4b8.png.gz)
 
 
+### 16. What is Data Integrity?
+Data Integrity is the assurance of accuracy and consistency of data over its entire life-cycle, and is a critical aspect to the design, implementation and usage of any system which stores, processes, or retrieves data. It also defines integrity constraints to enforce business rules on the data when it is entered into an application or a database.
+
