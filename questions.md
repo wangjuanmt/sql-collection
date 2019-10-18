@@ -151,3 +151,65 @@ NAME varchar(10) NOT NULL,
 AGE int DEFAULT 18  // DEFALUT
 );
 ````
+
+### 11. What is a Join? List its different types.
+The SQL Join clause is used to combine records (rows) from two or more tables in a SQL database based on a related column between the two.
+![different types of join](https://assets.interviewbit.com/assets/skill_interview_questions/sql/sql-join-types-8bc666e6be3a47e2fb8ef456f8c36ab473dce46d797d40b4bfbc3c60dcc2c6da.png.gz)
+
+There are four different types of JOINs in SQL:
+
+(INNER) JOIN: Retrieves records that have matching values in both tables involved in the join. This is the widely used join for queries.
+```` sql
+SELECT *
+FROM Table_A
+JOIN Table_B;
+
+SELECT *
+FROM Table_A
+INNER JOIN Table_B;
+````
+
+LEFT (OUTER) JOIN: Retrieves all the records/rows from the left and the matched records/rows from the right table.
+```` sql
+SELECT *
+FROM Table_A A
+LEFT JOIN Table_B B
+ON A.col = B.col;
+````
+
+RIGHT (OUTER) JOIN: Retrieves all the records/rows from the right and the matched records/rows from the left table.
+```` sql
+SELECT *
+FROM Table_A A
+RIGHT JOIN Table_B B
+ON A.col = B.col;
+````
+
+FULL (OUTER) JOIN: Retrieves all the records where there is a match in either the left or right table.
+```` sql
+SELECT *
+FROM Table_A A
+FULL JOIN Table_B B
+ON A.col = B.col;
+````
+
+### 12. What is a Self-Join?
+A self JOIN is a case of regular join where a table is joined to itself based on some relation between its own column(s). Self-join uses the INNER JOIN or LEFT JOIN clause and a table alias is used to assign different names to the table within the query.
+```` sql
+SELECT A.emp_id AS "Emp_ID",A.emp_name AS "Employee",
+B.emp_id AS "Sup_ID",B.emp_name AS "Supervisor"
+FROM employee A, employee B
+WHERE A.emp_sup = B.emp_id;
+````
+
+### 13. What is a Cross-Join?
+Cross join can be defined as a cartesian product of the two tables included in the join. The table after join contains the same number of rows as in the cross-product of number of rows in the two tables. If a WHERE clause is used in cross join then the query will work like an INNER JOIN.
+```` sql
+SELECT stu.name, sub.subject 
+FROM students AS stu
+CROSS JOIN subjects AS sub;
+````
+
+![cross-join](https://assets.interviewbit.com/assets/skill_interview_questions/sql/sql-self-cross-join-ac01aba97313e5f8740292417b156d4cdd524a5c5ac4efc3acd77d38434af4b8.png.gz)
+
+
