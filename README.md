@@ -355,3 +355,84 @@ Output:
 | 1       | Ramesh |
 | 2       | Suresh |
 
+### Normal Form
+
+#### Why Normalization?
+If a table has data redundancy and is not properly normalized, then it will difficult to handle and update the database, without facing data loss. It will also eat up extra memory space and Insertion, Updation and Deletion Anomalies are very frequent if database is not normalized.
+
+Normalization is the process of minimizing redundancy from a relation or set of relations. Redundancy in relation may cause insertion, deletion and updation anomalies. So, it helps to minimize the redundancy in relations. Normal forms are used to eliminate or reduce redundancy in database tables.
+````
+1. First Normal Form (1NF)
+2. Second Normal Form (2NF)
+3. Third Normal Form (3NF) 
+4. Boyce-Codd Normal Form (BCNF)
+5. Forth Normal Form (4NF)
+6. Fifth Normal Form (5NF) 
+````
+
+#### First Normal Form (1NF)
+If a relation contain composite or multi-valued attribute, it violates first normal form or a relation is in first normal form if it does not contain any composite or multi-valued attribute. A relation is in first normal form if every attribute in that relation is singled valued attribute.
+
+A table is in 1 NF if:
+* There should be Single Valued Attributes.
+* Attribute Domain should not change.
+* There should be Unique name for Attributes/Columns.
+* The order in which data is stored, does not matter.
+
+![conversion to 1NF](https://media.geeksforgeeks.org/wp-content/cdn-uploads/Normalisation_normalforms_1.png)
+
+First Normal Form (1NF) **does not eliminate redundancy**, but rather, it’s that it eliminates repeating groups.
+
+#### Second Normal Form (2NF)
+Second Normal Form (2NF) is based on the concept of full functional dependency. Second Normal Form applies to relations with composite keys, that is, relations with a primary key composed of two or more attributes. A relation with a single-attribute primary key is automatically in at least 2NF. A relation that is not in 2NF may suffer from the update anomalies.
+
+To be in second normal form, a relation must be in first normal form and relation must not contain any partial dependency. A relation is in 2NF if it has No Partial Dependency, i.e., no non-prime attribute (attributes which are not part of any candidate key) is dependent on any proper subset of any candidate key of the table.
+
+In other words,
+
+**A relation that is in First Normal Form and every non-primary-key attribute is fully functionally dependent on the primary key, then relation is in Second Normal Form (2NF).**
+
+**Note** – If the proper subset of candidate key determines non-prime attribute, it is called partial dependency.
+
+The normalization of 1NF relations to 2NF involves the removal of partial dependencies. If a partial dependency exists, we remove the partially dependent attribute(s) from the relation by placing them in a new relation along with a copy of their determinant.
+
+
+| STUD_NO | COURSE_NO | COURSE_FEE |
+|---------|-----------|------------|
+| 1       |     C1    |     1000   |
+| 2       |     C2    |     1500   |
+| 1       |     C4    |     2000   |
+| 4       |     C3    |     1000   |
+| 4       |     C1    |     1000   |
+| 2       |     C5    |     2000   |
+
+
+COURSE_FEE would be a non-prime attribute, as it does not belong to the one only candidate key {STUD_NO, COURSE_NO} ;
+But, COURSE_NO -> COURSE_FEE, i.e., COURSE_FEE is dependent on COURSE_NO, which is a proper subset of the candidate key. Non-prime attribute COURSE_FEE is dependent on a proper subset of the candidate key, which is a partial dependency and so this relation is not in 2NF.
+
+To convert the above relation to 2NF,
+we need to split the table into two tables such as :
+Table 1: STUD_NO, COURSE_NO
+Table 2: COURSE_NO, COURSE_FEE
+
+| STUD_NO | COURSE_NO |
+|---------|-----------|
+| 1       |     C1    |
+| 2       |     C2    |
+| 1       |     C4    |
+| 4       |     C3    |
+| 4       |     C1    |
+| 2       |     C5    |
+
+
+| COURSE_NO | COURSE_FEE |
+|-----------|------------|
+|     C1    |     1000   |
+|     C2    |     1500   |
+|     C3    |     1000   |
+|     C4    |     2000   |
+|     C5    |     2000   |
+
+
+**Note** – 2NF tries to reduce the redundant data getting stored in memory. For instance, if there are 100 students taking C1 course, we dont need to store its Fee as 1000 for all the 100 records, instead once we can store it in the second table as the course fee for C1 is 1000.
+
