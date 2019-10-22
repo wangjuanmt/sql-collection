@@ -436,3 +436,45 @@ Table 2: COURSE_NO, COURSE_FEE
 
 **Note** – 2NF tries to reduce the redundant data getting stored in memory. For instance, if there are 100 students taking C1 course, we dont need to store its Fee as 1000 for all the 100 records, instead once we can store it in the second table as the course fee for C1 is 1000.
 
+#### Third Normal Form (3NF)
+Although Second Normal Form (2NF) relations have less redundancy than those in 1NF, they may still suffer from update anomalies. If we update only one tuple and not the other, the database would be in an inconsistent state. This update anomaly is caused by a transitive dependency. We need to remove such dependencies by progressing to Third Normal Form (3NF).
+
+A relation is in third normal form, if there is no transitive dependency for non-prime attributes as well as it is in second normal form.
+
+A relation is in 3NF if at least one of the following condition holds in every non-trivial function dependency X –> Y:
+
+1. X is a super key.
+
+2. Y is a prime attribute (each element of Y is part of some candidate key).
+
+In other words,
+
+**A relation that is in First and Second Normal Form and in which no non-primary-key attribute is transitively dependent on the primary key, then it is in Third Normal Form (3NF).**
+
+**Note** – If A->B and B->C are two FDs then A->C is called transitive dependency.
+
+The normalization of 2NF relations to 3NF involves the removal of transitive dependencies. If a transitive dependency exists, we remove the transitively dependent attribute(s) from the relation by placing the attribute(s) in a new relation along with a copy of the determinant.
+
+![transitive-example](https://media.geeksforgeeks.org/wp-content/cdn-uploads/Normalisation_normalforms_3.png)
+
+FD set:
+{STUD_NO -> STUD_NAME, STUD_NO -> STUD_STATE, STUD_STATE -> STUD_COUNTRY, STUD_NO -> STUD_AGE}
+
+Candidate Key:
+{STUD_NO}
+
+For this relation in table above, STUD_NO -> STUD_STATE and STUD_STATE -> STUD_COUNTRY are true. So STUD_COUNTRY is transitively dependent on STUD_NO. It violates the third normal form. To convert it in third normal form, we will decompose the relation STUDENT (STUD_NO, STUD_NAME, STUD_PHONE, STUD_STATE, STUD_COUNTRY_STUD_AGE) as:
+
+````
+STUDENT (STUD_NO, STUD_NAME, STUD_PHONE, STUD_STATE, STUD_AGE) 
+STATE_COUNTRY (STATE, COUNTRY) 
+````
+
+**Note** –
+Third Normal Form (3NF) is considered adequate for normal relational database design because most of the 3NF tables are free of insertion, update, and deletion anomalies. Moreover, 3NF always ensures functional dependency preserving and lossless.
+
+#### Boyce-Codd Normal Form (BCNF)
+A relation is in BCNF iff, X is superkey for every functional dependency (FD) X→Y in given relation.
+
+In other words,**A relation is in BCNF, if and only if, every determinant is a Form (BCNF) candidate key.**
+
